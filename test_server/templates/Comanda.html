@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mediano's page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <script type="text/javascript">
+      var nmesa = {{ data.table }};
+      var posicion = {{ data.pos }};
+  </script>
+</head>
+
+<body class="container">
+    <main class="col-12 mt-5 mb-0">
+        <h1 class="d-block text-center titulo">Mesa {{data.table}} Posición: {{data.pos}}</h1>
+    </main>
+    <div class="row subtitle d-block text-center m-3">
+            <table class="table table-bordered border-dark">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col">Bebidas</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Comidas</th>
+                  <th scope="col">Precio</th>
+            </tr>
+              </thead>
+                <tbody>
+                  <tr>
+                  <th scope="row" class="table-success">Agua</th>
+                  <th class="table-success">1.00€</th>
+                  <th class="table-success">Croquetas</th>
+                  <th class="table-success">3.50€</th>
+                </tr>
+
+                  <tr>
+                  <th scope="row" class="table-info">Coca_Cola</th>
+                  <th class="table-info">2.00€</th>
+                  <th class="table-info">Serranito</th>
+                  <th class="table-info">2.50€</th>
+                </tr>
+
+                  <tr>
+                  <th scope="row" class="table-success">Fanta</th>
+                  <th class="table-success">1.40€</th>
+                  <th class="table-success">Solomillo</th>
+                  <th class="table-success">3.00€</th>
+                </tr>
+
+                  <tr>
+                  <th scope="row" class="table-info">Cerveza</th>
+                  <th class="table-info">1.50€</th>
+                  <th class="table-info">Tortilla</th>
+                  <th class="table-info">3.50€</th>
+                </tr>
+
+                  <tr>
+                  <th scope="row" class="table-success">Café</th>
+                  <th class="table-success">2.50€</th>
+                  <th class="table-success">Pescado_Frito</th>
+                  <th class="table-success">4.50€</th>
+                </tr>
+
+              </tbody>
+            </table>
+    </div>
+    <div class="row text-center">
+      <div class="row pt-3">
+        <button class="col-sm-6 btn">
+            <img class="rounded image" width="80%" src="https://2.bp.blogspot.com/-8MT7G4ye9wc/WLoA9CxBTrI/AAAAAAAAqdw/AcTlAxddHLYzogrLQ5uA5eN6vwlMhtVbgCLcB/s1600/un-simple-vaso-de-agua-puede-transmitirte-un-mensaje-1.jpg" onclick="addProduct(1)">
+            <div class="text middle">Agua</div>
+        </button>
+
+        <button class="col-sm-6 btn">
+            <img width="80%" class="rounded image" src="https://sevilla.abc.es/gurme/wp-content/uploads/sites/24/2015/11/croquetas-caseras-960x540.jpeg" onclick="addProduct(6)">
+            <div class="text middle">Croquetas</div>
+        </button>
+      </div>
+
+      <div class="row pt-3">
+        <button class="col-sm-6 btn">
+            <img class="rounded image" width="80%" src="https://preview.free3d.com/img/2020/07/2454701098527622523/j6h24hxj-900.jpg" onclick="addProduct(2)">
+            <div class="text middle">CocaCola</div>
+        </button>
+
+        <button class="col-sm-6 btn">
+            <img width="80%" class="rounded image" src="https://i.ytimg.com/vi/qeFORAKxPRw/hqdefault.jpg" onclick="addProduct(7)">
+            <div class="text middle">Serranito</div>
+        </button>
+      </div>
+
+      <div class="row pt-3">
+        <button class="col-sm-6 btn">
+            <img class="rounded image" height="80%" src="https://tucervezaadomicilio.com/wp-content/uploads/2020/07/lata-fanta-naranja.jpg" onclick="addProduct(3)">
+            <div class="text middle">Fanta</div>
+        </button>
+
+        <button class="col-sm-6 btn">
+            <img width="80%" class="rounded image" src="https://www.ecestaticos.com/image/clipping/972/547/295208ee711c62815aad786bb99d9583/como-preparar-el-solomillo-perfecto-y-un-truco-para-que-sepas-si-esta-en-su-punto.jpg" onclick="addProduct(8)">
+            <div class="text middle">Solomillo</div>
+        </button>
+      </div>
+
+      <div class="row pt-3">
+        <button class="col-sm-6 btn">
+            <img class="rounded image" width="80%" src="https://www.eluniversal.com.mx/sites/default/files/2016/08/26/datos_cerveza.jpg" onclick="addProduct(4)">
+            <div class="text middle">Cerveza</div>
+        </button>
+
+        <button class="col-sm-6 btn">
+            <img width="80%" class="rounded image" src="https://sevilla.abc.es/gurme/wp-content/uploads/sites/24/2016/06/tortilladepatatas-960x512.jpg" onclick="addProduct(9)">
+            <div class="text middle">Tortilla</div>
+        </button>
+      </div>
+
+      <div class="row pt-3">
+        <button class="col-sm-6 btn">
+            <img class="rounded image" width="80%" src="https://okdiario.com/img/vida-sana/2016/11/03/cafe.jpg" onclick="addProduct(5)">
+            <div class="text middle">Café</div>
+        </button>
+
+        <button class="col-sm-6 btn">
+            <img width="80%" class="rounded image" src="https://previews.123rf.com/images/olegd/olegd1108/olegd110800035/10118189-cruce%C3%B1o-de-pescado-frito-en-el-plato-en-la-mesa-de-madera.jpg" onclick="addProduct(10)">
+            <div class="text middle">Pescado Frito</div>
+        </button>
+      </div>
+
+  </div>
+
+    <div class="subtitle d-block text-center m-3">
+            <table class="table table-bordered border-dark">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col">Bebidas</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Comidas</th>
+                  <th scope="col">Cantidad</th>
+            </tr>
+              </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row" class="table-success">Agua</th>
+                    <th class="table-success" >
+                      <button class ="btn-secondary col-3 float-right rounded" onclick = "subtractProduct(1)">-</button>
+                      <i class="col-9" id = "CantAgua"></i>
+                    </th>
+                    <th class="table-success">Croquetas</th>
+                    <th class="table-success">
+                      <button class ="btn-secondary col-3 float-right rounded" onclick = "subtractProduct(6)">-</button>
+                      <i class="col-9" id = "CantCroquetas"></i>
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th scope="row" class="table-success">CocaCola</th>
+                    <th class="table-success" >
+                      <button class ="btn-secondary col-3 float-right rounded" onclick = "subtractProduct(2)">-</button>
+                      <i class="col-9" id = "CantCocacola"></i>
+                    </th>
+                    <th class="table-success">Serranito</th>
+                    <th class="table-success">
+                      <button class ="btn-secondary col-3 float-right rounded" onclick = "subtractProduct(7)">-</button>
+                      <i class="col-9" id = "CantSerranito"></i>
+                    </th>
+                  </tr>
+
+                  <tr>
+                      <th scope="row" class="table-success">Fanta</th>
+                      <th class="table-success" >
+                        <button class ="btn-secondary col-3 float-right rounded" onclick = "subtractProduct(3)">-</button>
+                        <i class="col-9" id = "CantFanta"></i>
+                      </th>
+                      <th class="table-success">Solomillo</th>
+                      <th class="table-success">
+                        <button class ="btn-secondary col-3 float-right rounded" onclick = "subtractProduct(8)">-</button>
+                        <i class="col-9" id = "CantSolomillo"></i>
+                      </th>
+                    </tr>
+
+
+                    <tr>
+                      <th scope="row" class="table-success">Cerveza</th>
+                      <th class="table-success" >
+                        <button class ="btn-secondary col-3 float-right rounded" onclick = "subtractProduct(4)">-</button>
+                        <i class="col-9" id = "CantCerveza"></i>
+                      </th>
+                      <th class="table-success">Tortilla</th>
+                      <th class="table-success">
+                        <button class ="btn-secondary col-3 float-right rounded" onclick = "subtractProduct(9)">-</button>
+                        <i class="col-9" id = "CantTortilla"></i>
+                      </th>
+                    </tr>
+
+                    <tr>
+                      <th scope="row" class="table-success">Café</th>
+                      <th class="table-success" >
+                        <button class ="btn-secondary col-3 float-right rounded" onclick = "subtractProduct(5)">-</button>
+                        <i class="col-9" id = "CantCafe"></i>
+                      </th>
+                      <th class="table-success">Pescado Frito</th>
+                      <th class="table-success">
+                        <button class ="btn-secondary col-3 float-right rounded" onclick = "subtractProduct(10)">-</button>
+                        <i class="col-9" id = "CantPescadoFrito"></i>
+                      </th>
+                    </tr>
+
+                  <tr>
+                  <th colspan = "2" class="table-dark">Precio Total</th>
+                   <th colspan = "1" class="table-info" id = "Precio"></th>
+                   <th colspan = "1" class="table-info" > euros </th>
+                  </tr>
+
+              </tbody>
+            </table>
+            </div>
+
+
+                <button class ="btn btn-primary col-12 text-center mt-3 mb-5 py-5" onclick = "enviarComanda()">Enviar y confirmar</button>
+
+
+</body>
+<footer>
+    <script src="{{ url_for('static', filename='js/socket.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/mains.js') }}"></script>
+</footer>
+
+</html>
