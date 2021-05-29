@@ -13,6 +13,11 @@ function msg(m){
 
 socket.on('data', setData);
 
+socket.on('update', function(data){
+  document.getElementById('estadoComanda').innerHTML = data['estado'];
+
+});
+
 function setData(data){
     var a = data.color;
     var b = data.id;

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Cocina</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body class="container text-center">
+    <main class="row mt-5 mb-0">
+        <h1 class="d-block text-center titulo">Lista de comandas</h1>
+    </main>
+
+
+    <div class="row subtitle d-block text-center m-3">
+            <table class="table table-bordered border-dark">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col">Productos</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Mesa</th>
+                  <th scope="col">Posición</th>
+                  <th scope="col">ID</th>
+                  <th scope="col">Precio total</th>
+                  <th scope="col">Acciones</th>
+                  <th scope="col">Estado</th>
+            </tr>
+              </thead>
+                 <tbody id="tabla">
+              </tbody>
+            </table>
+    </div>
+
+
+</body>
+
+<footer>
+    <script src="{{ url_for('static', filename='js/prueba.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/socket_cocina.js') }}"></script>
+</footer>
+
+</html>

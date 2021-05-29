@@ -101,7 +101,7 @@ input[type="submit"] {
     border-width: 1px;
     border-color: #7b7a7ab1;
   }
-  
+
   .middle {
     transition: .5s ease;
     opacity: 0;
@@ -112,15 +112,15 @@ input[type="submit"] {
     -ms-transform: translate(-50%, -50%);
     text-align: center;
   }
-  
+
   .btn:hover .image {
     opacity: 0.3;
   }
-  
+
   .btn:hover .middle {
     opacity: 1;
   }
-  
+
   .text {
     background-color: #414141;
     color: white;
