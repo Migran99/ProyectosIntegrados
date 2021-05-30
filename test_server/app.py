@@ -39,7 +39,12 @@ def index():
 # APP COCINA
 @app.route('/cocina/')
 def cocinaindex():
-    return render_template('Cocina.html', async_mode=socketio.async_mode, data={'table':0,'pos':0})
+    return render_template('Cocina.html', async_mode=socketio.async_mode, data={'table':-1,'pos':-1})
+
+# DESPEDIDA
+@app.route('/gracias/')
+def gracias():
+    return render_template('gracias.html', async_mode=socketio.async_mode)
 
 
 ##-----------------------------------------------
@@ -58,10 +63,13 @@ def conectado(data):
     if(data['mesa'] == -1 or data['pos'] == -1):
         print('Kitchen connected with SID: ' + request.sid)
         cocinaSID = request.sid
-    else:
-        print('New user at table [' + str(data['mesa']) + '] position [' + str(data['pos']) + ']')
-        cuentas[data['mesa']][data['pos']] = Account('cuenta',df,data['mesa'],data['pos'])
-        clients[data['mesa']][data['pos']] = request.sid
+    else: # Usuario nuevo o ya existe cuenta para esa posicion?
+        if(cuentas[data['mesa']][data['pos']] == 0 or cuentas[data['mesa']][data['pos']] == None):
+            print('New user at table [' + str(data['mesa']) + '] position [' + str(data['pos']) + ']')
+            cuentas[data['mesa']][data['pos']] = Account('cuenta',df,data['mesa'],data['pos'])
+            clients[data['mesa']][data['pos']] = request.sid
+        else:
+            print('ERROR, USER ALREADY EXISTS')
 
 
 
@@ -72,18 +80,21 @@ def comanda(message):
     global IDpedido
     mesa = message['mesa']
     pos = message['pos']
-    for c in message['data']:
-       # print(c)
-        #print(c['product'] + " : " + c['quantity'])
-        #print(int(c['quantity']) + 2)
-        cuentas[mesa][pos].addProduct([c['product']],[int(c['quantity'])],message['id'])
+    if(any(request.sid in sublist for sublist in clients)): #Comprobamos si el usuario está registrado
+        for c in message['data']:
+            # print(c)
+            #print(c['product'] + " : " + c['quantity'])
+            #print(int(c['quantity']) + 2)
+            cuentas[mesa][pos].addProduct([c['product']],[int(c['quantity'])],message['id'])
 
-    print(cuentas[mesa][pos].getOrders())
-    emit('update',
-         {'estado': 'Recibido', 'id': message['id']})
-    emit('nuevaComanda',
-         {'data': message['data'], 'id': IDpedido, 'mesa': message['mesa'], 'pos':message['pos'], 'total': cuentas[mesa][pos].getBill()},room=cocinaSID)
-    IDpedido = IDpedido + 1
+        print(cuentas[mesa][pos].getOrders())
+        emit('update',
+            {'estado': 'Recibido', 'id': message['id']})
+        emit('nuevaComanda',
+            {'data': message['data'], 'id': IDpedido, 'mesa': message['mesa'], 'pos':message['pos'], 'total': cuentas[mesa][pos].getBill()},room=cocinaSID)
+        IDpedido = IDpedido + 1
+    else:
+        print('ERROR, USER NOT REGISTERED')
 
 
 # COCINA ACTUALIZA ESTADO
@@ -107,6 +118,12 @@ def prueba(message):
 @socketio.on('disconnect')
 def test_disconnect():
     print('Client disconnected', request.sid)
+    for x in range(len(clients)):
+        for y in range(2):
+            if(clients[x][y] == request.sid):
+                clients[x][y] = None
+                cuentas[x][y] = None
+                #print(cuentas)
 
 ## -------------------------------------------------------
 

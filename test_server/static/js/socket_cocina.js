@@ -13,3 +13,4 @@ socket.on('nuevaComanda', function(data){
   recogerComanda(data);
 });
 
+

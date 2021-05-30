@@ -10,12 +10,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  
 </head>
 
 <body class="container text-center">
     <main class="row mt-5 mb-0">
         <h1 class="d-block text-center titulo">Lista de comandas</h1>
     </main>
+
+    <div class="row subtitle d-block text-center m-3">
+            <table class="table table-bordered border-dark">
+
+                <tr>
+                  <th colspan = "6" class="table-dark">Disponibilidad del robot</th>
+                  <th colspan = "2" class="table-success" id="estado_robot">Ocupado/Disponible</th>
+                </tr>
+
+    </div>
 
 
     <div class="row subtitle d-block text-center m-3">

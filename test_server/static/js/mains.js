@@ -92,35 +92,18 @@ document.getElementById('Precio').innerHTML = Precio;
 
   if(comanda.length > 0) msg(comanda);
 
-  vector.agua = 0;  vector.cocacola = 0;  vector.fanta = 0;  vector.cerveza = 0;  vector.cafe = 0;
-  vector.croquetas = 0;  vector.serranito = 0;  vector.solomillo = 0;  vector.tortilla = 0;  vector.pescadofrito = 0;
+  var botonenviar = document.getElementById("botonenviar");
+  botonenviar.disabled = true;
 
-  contagua = 0; contcocacola = 0; contcerveza = 0; contfanta = 0; contcafe = 0;
-  contcroquetas = 0; contserranito = 0; contsolomillo = 0; conttortilla = 0; contpescadofrito = 0;
-  Precio = 0.00;
-  document.getElementById('CantAgua').innerHTML = contagua;
-  document.getElementById('CantCocacola').innerHTML = contcocacola;
-  document.getElementById('CantFanta').innerHTML = contfanta;
-  document.getElementById('CantCerveza').innerHTML = contcerveza;
-  document.getElementById('CantCafe').innerHTML = contcafe;
+  for (i=0; i<10 ; i++)
+  {
+  var botonborrar = document.getElementById("botonborrar" + i);
+  botonborrar.disabled = true;
 
-  document.getElementById('CantCroquetas').innerHTML = contcroquetas;
-  document.getElementById('CantSerranito').innerHTML = contserranito;
-  document.getElementById('CantSolomillo').innerHTML = contsolomillo;
-  document.getElementById('CantTortilla').innerHTML = conttortilla;
-  document.getElementById('CantPescadoFrito').innerHTML = contpescadofrito;
+  var botonborrarpedir = document.getElementById("botonborrarpedir" + i);
+  botonborrarpedir.disabled = true;
 
-  document.getElementById('Precio').innerHTML = Precio;
-
-    //comanda = [];
+}
 
 
   }
-
-    function escribirestado(){
-    document.getElementById('texto').innerHTML = 'en preparacion';
-
-}
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

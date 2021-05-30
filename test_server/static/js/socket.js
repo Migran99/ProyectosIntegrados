@@ -11,16 +11,11 @@ function msg(m){
   //$(".addedDrink"). = "";
 }
 
-socket.on('data', setData);
-
 socket.on('update', function(data){
   document.getElementById('estadoComanda').innerHTML = data['estado'];
 
 });
 
-function setData(data){
-    var a = data.color;
-    var b = data.id;
-    console.log("My id is: " + a + " and my color is: " + b);
-    //document.getElementById("texto").value = "error"
+function finalizarPedido(){
+  socket.emit('finalizarPedido', { mesa: nmesa, pos:posicion});
 }
