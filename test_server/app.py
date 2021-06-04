@@ -103,6 +103,9 @@ def cocinaUpdate(message):
     print(message)
     emit('update',
          {'estado': message['state'], 'id': message['id']},room=clients[message['mesa']][message['pos']])
+    if message['state']=='Preparado':   #al pulsar el boton de preparado, le damos al robot la orden de servir mesa
+        emit('servir_mesa',
+        {'mesa':message['mesa'], 'pos':message['pos']},room=robotSID)
 
 
 # TESTS
@@ -111,6 +114,14 @@ def cocinaUpdate(message):
 def prueba(message):
     print(message)
 
+
+#ROBOT
+
+@socketio.event
+def robot(message):
+    global robotSID
+    robotSID=request.sid  #guardamos el id del robot
+    print(message)
 
 
 # DESCONEXION
@@ -121,6 +132,9 @@ def test_disconnect():
     for x in range(len(clients)):
         for y in range(2):
             if(clients[x][y] == request.sid):
+                if cuentas[x][y].total!=0: #si el cliente ha hecho un pedido, recogemos su mesa (esto es para evitar errores cuando se recarga la pagina)  TODO poner mejor si hay otra idea
+                    emit('recoger_mesa',
+                    {'mesa':x, 'pos':y},room=robotSID)
                 clients[x][y] = None
                 cuentas[x][y] = None
                 #print(cuentas)
