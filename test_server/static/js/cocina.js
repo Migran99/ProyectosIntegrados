@@ -31,6 +31,7 @@ function PedidoReady(id){
 
 function activarBoton(id){
   mid = "desc"+String(id);
+  console.log(mid);
   var botonenviar = document.getElementById(mid);
   botonenviar.disabled = false;
 }

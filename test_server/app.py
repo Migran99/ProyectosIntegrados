@@ -13,6 +13,8 @@ rows, cols = (12,2)
 cuentas = [[0 for i in range(cols)] for j in range(rows)]
 clients = [[0 for i in range(cols)] for j in range(rows)]
 cocinaSID = -1
+
+ids = [[0 for i in range(cols)] for j in range(rows)]
 IDpedido = 0
 
 async_mode = None
@@ -92,6 +94,7 @@ def comanda(message):
             {'estado': 'Recibido', 'id': message['id']})
         emit('nuevaComanda',
             {'data': message['data'], 'id': IDpedido, 'mesa': message['mesa'], 'pos':message['pos'], 'total': cuentas[mesa][pos].getBill()},room=cocinaSID)
+        ids[mesa][pos] = IDpedido
         IDpedido = IDpedido + 1
     else:
         print('ERROR, USER NOT REGISTERED')
@@ -125,7 +128,7 @@ def robot(message):
 
 @socketio.event
 def robot_state(estado):
-    emit('nuevaComanda',
+    emit('robot_state',
             estado,room=cocinaSID)
 
 
@@ -137,7 +140,8 @@ def test_disconnect():
     for x in range(len(clients)):
         for y in range(2):
             if(clients[x][y] == request.sid):
-                if cuentas[x][y].total!=0: #si el cliente ha hecho un pedido, recogemos su mesa (esto es para evitar errores cuando se recarga la pagina)  TODO poner mejor si hay otra idea
+                emit('finCliente',{'id': ids[x][y]},room=cocinaSID)
+                if(cuentas[x][y].getBill()!=0): #si el cliente ha hecho un pedido, recogemos su mesa (esto es para evitar errores cuando se recarga la pagina)  TODO poner mejor si hay otra idea
                     emit('recoger_mesa',
                     {'mesa':x, 'pos':y},room=robotSID)
                 clients[x][y] = None
