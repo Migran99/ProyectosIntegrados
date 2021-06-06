@@ -29,6 +29,16 @@ function PedidoReady(id){
     $('#' + id).html(texto);
 }
 
+function activarBoton(id){
+  mid = "desc"+String(id);
+  var botonenviar = document.getElementById(mid);
+  botonenviar.disabled = false;
+}
+
+function robotState(estado){
+  $('#estado_robot').html(estado);
+}
+
 function recogerComanda(data){
   let comanda = data['data'];
   let nmesa = data['mesa'];
@@ -65,7 +75,7 @@ function recogerComanda(data){
                   <th class="table-success" id="${"id"+id_pedido}">${id_pedido}</th>
                   <th class="table-success" id="${"price"+id_pedido}">${totalPrice+' €'}</th>
                   <th class="table-success" id="${"action"+id_pedido}">
-                      <button class ="btn-danger col-12 float-right rounded" onclick = "descartar(${id_pedido})">Descartar</button>
+                      <button class ="btn-danger col-12 float-right rounded"  id="${"desc"+id_pedido}" disabled onclick = "descartar(${id_pedido})">Descartar</button>
                       <br><br>
                       <button class ="btn-warning col-12 float-right rounded" onclick = "Preparacion(${id_pedido})">En preparación</button>
                       <br><br>

@@ -131,3 +131,7 @@ input[type="submit"] {
   .btn-primary{
       background-color: #414141;
   }
+
+  .btn-danger:disabled{
+    background-color: #7c7878;
+  }

@@ -121,7 +121,12 @@ def prueba(message):
 def robot(message):
     global robotSID
     robotSID=request.sid  #guardamos el id del robot
-    print(message)
+    #print(message)
+
+@socketio.event
+def robot_state(estado):
+    emit('nuevaComanda',
+            estado,room=cocinaSID)
 
 
 # DESCONEXION

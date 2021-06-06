@@ -13,4 +13,12 @@ socket.on('nuevaComanda', function(data){
   recogerComanda(data);
 });
 
+socket.on('finCliente', function(data){
+  id = data['id'];
+  activarBoton(id);
+});
 
+
+socket.on('robot_state', function(data){
+  robotState(data);
+});
