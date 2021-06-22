@@ -1,3 +1,6 @@
+## @package AppServidor
+# Codigo principal servidor Comunicacion con el resto de dispositivos.
+
 from flask import Flask, render_template, session, request, \
     copy_current_request_context
 from flask_socketio import SocketIO, emit, join_room, leave_room, \
@@ -84,9 +87,6 @@ def comanda(message):
     pos = message['pos']
     if(any(request.sid in sublist for sublist in clients)): #Comprobamos si el usuario está registrado
         for c in message['data']:
-            # print(c)
-            #print(c['product'] + " : " + c['quantity'])
-            #print(int(c['quantity']) + 2)
             cuentas[mesa][pos].addProduct([c['product']],[int(c['quantity'])],message['id'])
 
         print(cuentas[mesa][pos].getOrders())
@@ -123,8 +123,7 @@ def prueba(message):
 @socketio.event
 def robot(message):
     global robotSID
-    robotSID=request.sid  #guardamos el id del robot
-    #print(message)
+    robotSID=request.sid  #Guardamos el id del robot
 
 @socketio.event
 def robot_state(estado):
@@ -141,12 +140,11 @@ def test_disconnect():
         for y in range(2):
             if(clients[x][y] == request.sid):
                 emit('finCliente',{'id': ids[x][y]},room=cocinaSID)
-                if(cuentas[x][y].getBill()!=0): #si el cliente ha hecho un pedido, recogemos su mesa (esto es para evitar errores cuando se recarga la pagina)  TODO poner mejor si hay otra idea
+                if(cuentas[x][y].getBill()!=0): #Si el cliente ha hecho un pedido, recogemos su mesa.
                     emit('recoger_mesa',
                     {'mesa':x, 'pos':y},room=robotSID)
                 clients[x][y] = None
                 cuentas[x][y] = None
-                #print(cuentas)
 
 ## -------------------------------------------------------
 

@@ -1,9 +1,13 @@
+## @package DataManagement
+# Codigo gestion de base de datos para los pedidos
+
 import pickle
 import pandas as pd
-### Tools to manage data
 
 prices = {'Cocacola': 2, 'Agua': 1,'Fanta': 1.4,'Cerveza': 1.5,'Cafe': 2.5,'Croquetas': 3.5, 'Serranito': 2.5, 'Solomillo': 3, 'Tortilla': 3.5,'PescadoFrito':4.5}
 
+## Clase para las cuentas
+# Contienen nombre, posicion, mesa y la informacion del pedido recibido
 class Account:
     def __init__(self,name,data,table,pos):
         self.name = name
@@ -30,6 +34,8 @@ class Account:
         return self.total
    
 
+## En caso de querer guardar una cuenta podemos utilizar Pickle
+# No esta en uso actualmente
 def exportAccount(account,name='export.pkl',path=''):
     pickle.dump(account,open(path+name,'wb'))
 
